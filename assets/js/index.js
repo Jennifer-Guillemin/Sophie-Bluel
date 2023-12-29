@@ -22,6 +22,8 @@ const displayworks = () => {
   });
 };
 
+getworks();
+
 //Les filtres
 let categories = [];
 const button = document.querySelector(".categories");
@@ -34,6 +36,8 @@ const createinputElement = () => {
   }
 };
 
+const Filtres = document.querySelectorAll("filtres");
+
 const getcategories = () => {
   fetch("http://localhost:5678/api/categories")
     .then((res) => res.json())
@@ -43,7 +47,32 @@ const getcategories = () => {
     });
 };
 
-document.addEventListener("DOMContentLoaded", () => {
-  getworks();
-  getcategories();
-});
+getcategories();
+
+// Formulaire de connexion
+function validateForm() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  const errorMessageElement = document.getElementById("error-message");
+
+  errorMessageElement.innerText = "";
+
+  if (email === "" || password === "") {
+    errorMessageElement.innerText = "Veuillez remplir tous les champs.";
+  } else if (!isValidEmail(email)) {
+    errorMessageElement.innerText =
+      "Veuillez saisir une adresse e-mail valide.";
+  } else {
+    if (email === "utilisateur@example.com" && password === "motdepasse") {
+      alert("Connexion réussie pour " + email + "!");
+    } else {
+      errorMessageElement.innerText =
+        "Erreur dans l’identifiant ou le mot de passe";
+    }
+  }
+}
+
+function isValidEmail(email) {
+  var emailRegex = /[a-z0-9._-]+@[a-z0-9._-]+\.[a-z0-9._-]+/;
+  return emailRegex.test(email);
+}

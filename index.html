@@ -12,6 +12,7 @@
     />
     <meta name="description" content="" />
     <link rel="stylesheet" href="./assets/style.css" />
+    <link rel="stylesheet" href="login.html" />
   </head>
   <body>
     <header>
@@ -20,7 +21,10 @@
         <ul>
           <li>projets</li>
           <li>contact</li>
-          <li>login</li>
+          <a href="login.html" class="no-style">
+            <li>login</li>
+          </a>
+
           <li><img src="./assets/icons/instagram.png" alt="Instagram" /></li>
         </ul>
       </nav>
@@ -51,12 +55,10 @@
       </section>
       <section id="portfolio">
         <h2>Mes Projets</h2>
-        <div id="Filtres">
-          <div class="categories">
-            <input type="submit" value="Tous" />
-          </div>
-          <div class="gallery"></div>
+        <div class="categories">
+          <input class="selected" type="submit" value="Tous" id="filtres" />
         </div>
+        <div class="gallery"></div>
       </section>
       <section id="contact">
         <h2>Contact</h2>
@@ -68,7 +70,7 @@
           <input type="email" name="email" id="email" />
           <label for="message">Message</label>
           <textarea name="message" id="message" cols="30" rows="10"></textarea>
-          <input type="submit" value="Envoyer" />
+          <input class="selected" type="submit" value="Envoyer" />
         </form>
       </section>
     </main>
