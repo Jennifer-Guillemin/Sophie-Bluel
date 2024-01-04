@@ -271,11 +271,16 @@ input[type="submit"] {
   padding: 1% 3%;
   text-align: center;
   border-radius: 60px;
+  width: auto;
 }
 
 input[type="submit"].selected {
   background-color: #1d6154;
   color: white;
+}
+
+.login_selected {
+  font-weight: bold;
 }
 
 footer nav ul {
