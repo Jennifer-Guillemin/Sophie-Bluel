@@ -1,21 +1,41 @@
 //Formulaire de connexion
-const email = document.getElementById(email);
-const password = document.getElementById(password);
+const btnLogin = document.querySelector("#btn_login");
 
-const login = () => {
-  fetch("http://localhost:5678/api/users/login").then((log) => log.json());
+btnLogin.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  const user = {
+    email: email,
+    password: password,
+  };
+  login(user);
+});
+
+const login = (user) => {
+  fetch("http://localhost:5678/api/users/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(user),
+  })
+    .then((rep) => rep.json())
+    .then((data) => {
+      if (data.token) {
+        sessionStorage.setItem("token", JSON.stringify(data.token));
+      } else {
+        alert("Erreur dans l’identifiant ou le mot de passe");
+      }
+    });
 };
 
-export function ajoutListenerEnvoyer() {
-  const formulaire = document.querySelector(".formulaire");
-  formulaire.addEventListener("submit", function (event) {
-    event.preventDefault();
+const isLogin = () => {
+  return sessionStorage.getItem("token") ? true : false;
+};
 
-    login();
-  });
+if (isLogin()) {
+  alert("Online");
+} else {
+  alert("Offline");
 }
-
-fetch("http://localhost:5678/api/users/login", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-});
