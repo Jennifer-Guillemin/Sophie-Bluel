@@ -9,9 +9,6 @@ const openModal = function (e) {
   modal = target;
   modal.addEventListener("click", closeModal);
   modal.querySelector(".js-close").addEventListener("click", closeModal);
-  modal
-    .querySelector(".js-modal-stop")
-    .addEventListener("click", stopPropagation);
 };
 
 const closeModal = function (e) {
@@ -22,14 +19,7 @@ const closeModal = function (e) {
   modal.removeAttribute("aria-modal");
   modal.removeEventListener("click", closeModal);
   modal.querySelector(".js-close").removeEventListener("click", closeModal);
-  modal
-    .querySelector(".js-modal-stop")
-    .removeEventListener("click", stopPropagation);
   modal = null;
-};
-
-const stopPropagation = function (e) {
-  e.stopPropagation();
 };
 
 document.querySelectorAll(".js-modal").forEach((a) => {

@@ -24,18 +24,9 @@ const login = (user) => {
     .then((data) => {
       if (data.token) {
         sessionStorage.setItem("token", JSON.stringify(data.token));
+        window.location.href = "index.html";
       } else {
         alert("Erreur dans l’identifiant ou le mot de passe");
       }
     });
 };
-
-const isLogin = () => {
-  return sessionStorage.getItem("token") ? true : false;
-};
-
-if (isLogin()) {
-  alert("Online");
-} else {
-  alert("Offline");
-}

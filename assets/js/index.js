@@ -24,6 +24,30 @@ const displayworks = () => {
 
 getworks();
 
+// Affichage les photos dans la modale
+const modalphotos = document.querySelector(".modalphotos");
+
+const displaymodalworks = () => {
+  modalphotos.innerHTML = "";
+
+  Works.forEach((element) => {
+    modalphotos.innerHTML += `<div class="imageContainer">
+  <img src="${element.imageUrl}" alt="${element.title}" class="ModalImg">
+  <button class="deleted"><i class="fa-solid fa-trash-can"></i></button>
+</div>`;
+  });
+};
+
+const getmodalworks = () => {
+  fetch("http://localhost:5678/api/works/")
+    .then((res) => res.json())
+    .then((data) => {
+      Works = data;
+      displaymodalworks();
+    });
+};
+getmodalworks();
+
 //Les filtres
 let categories = [];
 
@@ -96,3 +120,34 @@ const displayFilteredWorks = (filteredWorks) => {
     </figure>`;
   });
 };
+
+//Affichage du message d'alerte Online/Offline
+const isLogin = () => {
+  return sessionStorage.getItem("token") ? true : false;
+};
+
+document.addEventListener("DOMContentLoaded", function () {
+  if (isLogin()) {
+    alert("Online");
+    // L'utilisateur est connecté, afficher les éléments masqués
+    const hideTopbar = document.getElementById("hide");
+    const modifier = document.getElementById("modifier");
+    const login = document.getElementById("login");
+    const logout = document.getElementById("logout");
+    if ((hideTopbar, modifier, login, logout)) {
+      hideTopbar.style.display = "flex";
+      modifier.style.display = "flex";
+      button.style.display = "none";
+      login.style.display = "none";
+      logout.style.display = "inline-block";
+    }
+  } else {
+    alert("Offline");
+  }
+});
+
+// Fonction pour déconnecter l'utilisateur
+logout.addEventListener("click", function () {
+  sessionStorage.removeItem("token");
+  window.location.href = "login.html";
+});

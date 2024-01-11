@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="login.html" />
   </head>
   <body>
-    <div class="top-bar">
+    <div class="top-bar" id="hide" style="display: none;">
       <i class="fa-regular fa-pen-to-square"></i> 
       <p>Mode édition</p>
     </div>
@@ -30,9 +30,13 @@
           <a href="#contact" class="no-style">
             <li>contact</li>
           </a>
-          <a href="login.html" class="no-style">
+          <a href="login.html" class="no-style" style="display: flex;" id="login">
             <li>login</li>
           </a>
+          <a href="" class="no-style" style="display: none;" id="logout">
+            <li>logout</li>
+          </a>
+
           <li>
             <img src="./assets/icons/instagram.png" alt="Instagram" /></li>
         </ul>
@@ -65,7 +69,7 @@
       <section id="portfolio">
         <div class="projets-title">
            <h2 id="projets">Mes projets</h2>
-        <a href="#modal1" class="no-style js-modal"><i class="fa-regular fa-pen-to-square"></i>modifier</a>
+        <a href="#modal1" class="no-style js-modal" id="modifier" style="display: none;"><i class="fa-regular fa-pen-to-square"></i>modifier</a>
         </div>
        
         <aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titlemodal" style="display: none;" >
@@ -74,11 +78,13 @@
               <i class="fa-solid fa-xmark" ></i>
             </button>
             <p id="titlemodal">Galerie photo</p>
+            <div class="modalphotos">
+            </div>
             <hr>
-            <input type="submit" value="Ajouter une photo" class="selected">
+            <input type="button" value="Ajouter une photo" class="btn_envoyer selected">
           </div>
         </aside>
-        <div class="categories">
+        <div class="categories" style="display: flex;">
           <input class="selected" type="button" value="Tous" id="filtres"></input>
         </div>
         <div class="gallery"></div>
