@@ -259,7 +259,6 @@ li:hover {
 }
 
 .modal {
-  z-index: 1;
   position: fixed;
   display: flex;
   align-items: center;
@@ -281,10 +280,9 @@ li:hover {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 430px;
-  height: 688px;
   border-radius: 10px;
   background-color: white;
-  padding: 0 100px;
+  padding: 50px 100px;
 }
 
 .modalgallery input {
@@ -333,8 +331,9 @@ li:hover {
 }
 
 .fleche {
-  margin-top: 8px;
-  margin-right: 8px;
+  margin-top: 10px;
+  margin-left: 10px;
+  font-size: 20px;
   border: 0;
   background-color: white;
   position: absolute;
@@ -342,7 +341,15 @@ li:hover {
   left: 10px;
 }
 
-#titlemodal {
+#titlemodal1 {
+  display: flex;
+  justify-content: center;
+  font-size: 30px;
+  font-weight: 400;
+  margin-top: 1em;
+}
+
+#titlemodal2 {
   display: flex;
   justify-content: center;
   font-size: 30px;
@@ -361,6 +368,7 @@ hr {
 .ajoutgallery {
   display: flex;
   flex-direction: column;
+  align-items: center;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -403,6 +411,7 @@ hr {
 .formulaire {
   display: flex;
   flex-direction: column;
+  width: 430px;
 }
 
 .formulaire label {
@@ -480,13 +489,17 @@ hr {
   justify-content: center;
 }
 
+.categories input[type="button"] {
+  margin: 0 0 5% 1%;
+}
+
 input[type="button"] {
   font-family: "Syne";
   font-weight: 700;
   color: #1d6154;
   background-color: rgba(255, 254, 248, 1);
   padding: 1% 3%;
-  margin: 2% 1% 5%;
+  margin: 1%;
   text-align: center;
   border-radius: 60px;
 }

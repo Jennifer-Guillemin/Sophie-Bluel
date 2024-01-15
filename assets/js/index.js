@@ -26,15 +26,29 @@ getworks();
 
 // Affichage les photos dans la modale
 const modalphotos = document.querySelector(".modalphotos");
-
 const displaymodalworks = () => {
   modalphotos.innerHTML = "";
 
   Works.forEach((element) => {
-    modalphotos.innerHTML += `<div class="imageContainer">
-  <img src="${element.imageUrl}" alt="${element.title}" class="ModalImg">
-  <button class="deleted"><i class="fa-solid fa-trash-can"></i></button>
-</div>`;
+    const imageContainer = document.createElement("div");
+    const ModalImg = document.createElement("img");
+    const deleteBtn = document.createElement("button");
+    deleteBtn.innerHTML = "<i class='fa-solid fa-trash-can'>";
+
+    modalphotos.appendChild(imageContainer);
+    imageContainer.className = "imageContainer";
+
+    imageContainer.appendChild(ModalImg);
+    ModalImg.className = "ModalImg";
+    ModalImg.src = element.imageUrl;
+    ModalImg.alt = element.title;
+
+    imageContainer.appendChild(deleteBtn);
+    deleteBtn.className = "deleted";
+
+    deleteBtn.addEventListener("click", () => {
+      deletedWork(element.id);
+    });
   });
 };
 
@@ -47,6 +61,22 @@ const getmodalworks = () => {
     });
 };
 getmodalworks();
+
+const deletedWork = (id) => {
+  fetch("http://localhost:5678/api/works/" + id, {
+    method: "DELETE",
+    headers: {
+      Authorization: "Bearer " + JSON.parse(sessionStorage.getItem("token")),
+    },
+  }).then((response) => {
+    console.log(response);
+    getworks();
+    getmodalworks();
+  });
+};
+
+const AddPicture = document.querySelector(".AddPicture");
+AddPicture.addEventListener("click", () => {});
 
 //Les filtres
 let categories = [];
@@ -144,6 +174,32 @@ document.addEventListener("DOMContentLoaded", function () {
   } else {
     alert("Offline");
   }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const AddPicture = document.querySelector(".modalgallery .AddPicture");
+  const flecheButton = document.querySelector(".ajoutgallery .fleche");
+  const modalGallery = document.querySelector(".modalgallery");
+  const ajoutGallery = document.querySelector(".ajoutgallery");
+  const allButtonsInModal = document.querySelectorAll(
+    'input[type="button"], button'
+  );
+
+  AddPicture.addEventListener("click", function (event) {
+    modalGallery.style.display = "none";
+    ajoutGallery.style.display = "flex";
+  });
+
+  flecheButton.addEventListener("click", function () {
+    modalGallery.style.display = "flex";
+    ajoutGallery.style.display = "none";
+  });
+
+  allButtonsInModal.forEach(function (button) {
+    button.addEventListener("click", function (event) {
+      event.stopPropagation();
+    });
+  });
 });
 
 // Fonction pour déconnecter l'utilisateur

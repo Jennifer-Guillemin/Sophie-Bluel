@@ -75,21 +75,21 @@
         </div>
        
         <aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titlemodal" style="display: none;" >
-          <div class="modalgallery js-modal-stop">
+          <div class="modalgallery">
             <button class="js-close">
               <i class="fa-solid fa-xmark" ></i>
             </button>
-            <p id="titlemodal">Galerie photo</p>
+            <p id="titlemodal1">Galerie photo</p>
             <div class="modalphotos">
             </div>
             <hr>
-            <input type="button" value="Ajouter une photo" class="btn_envoyer selected">
+            <input type="button" value="Ajouter une photo" class="AddPicture btn_envoyer selected">
           </div>
 
           <div class="ajoutgallery" style="display: none;">
             <button class="fleche"><i class="fa-solid fa-arrow-left"></i></button>
             <button class="js-close"><i class="fa-solid fa-xmark" ></i></button>
-            <p id="titlemodal">Ajout photo</p>
+            <p id="titlemodal2">Ajout photo</p>
             <div class="rectangle_photo">
               <i class="fa-regular fa-image"></i>
               <input type="button" id="imageInput" value="+ Ajouter photo" accept="image/*" class="btn_envoyer">
@@ -101,7 +101,9 @@
               <label for="Catégorie">Catégorie</label>
               <input type="text" id="Catégorie" name="Catégorie" required />
             </form>
-            <hr>
+            <div style="text-align: center;">
+              <hr>
+          </div>
             <input type="button" value="Valider" class="btn_envoyer">
         </aside>
 
