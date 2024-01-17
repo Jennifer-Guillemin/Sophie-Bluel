@@ -24,7 +24,7 @@ const displayworks = () => {
 
 getworks();
 
-// Affichage les photos dans la modale
+// Afficher la galerie dans la modale
 const modalphotos = document.querySelector(".modalphotos");
 const displaymodalworks = () => {
   modalphotos.innerHTML = "";
@@ -74,9 +74,6 @@ const deletedWork = (id) => {
     getmodalworks();
   });
 };
-
-const AddPicture = document.querySelector(".AddPicture");
-AddPicture.addEventListener("click", () => {});
 
 //Les filtres
 let categories = [];
@@ -176,14 +173,18 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
+// Fonction pour déconnecter l'utilisateur
+logout.addEventListener("click", function () {
+  sessionStorage.removeItem("token");
+  window.location.href = "login.html";
+});
+
+//Afficher/cacher la premiere modale ou la deuxieme modale
 document.addEventListener("DOMContentLoaded", function () {
   const AddPicture = document.querySelector(".modalgallery .AddPicture");
   const flecheButton = document.querySelector(".ajoutgallery .fleche");
   const modalGallery = document.querySelector(".modalgallery");
   const ajoutGallery = document.querySelector(".ajoutgallery");
-  const allButtonsInModal = document.querySelectorAll(
-    'input[type="button"], button'
-  );
 
   AddPicture.addEventListener("click", function (event) {
     modalGallery.style.display = "none";
@@ -193,17 +194,6 @@ document.addEventListener("DOMContentLoaded", function () {
   flecheButton.addEventListener("click", function () {
     modalGallery.style.display = "flex";
     ajoutGallery.style.display = "none";
+    resetImagePreview();
   });
-
-  allButtonsInModal.forEach(function (button) {
-    button.addEventListener("click", function (event) {
-      event.stopPropagation();
-    });
-  });
-});
-
-// Fonction pour déconnecter l'utilisateur
-logout.addEventListener("click", function () {
-  sessionStorage.removeItem("token");
-  window.location.href = "login.html";
 });
