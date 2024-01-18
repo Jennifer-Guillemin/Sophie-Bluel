@@ -1,3 +1,4 @@
+// Ouvrir la modale
 let modal = null;
 
 const openModal = function (e) {
@@ -24,6 +25,7 @@ document.querySelectorAll(".js-modal").forEach((a) => {
   a.addEventListener("click", openModal);
 });
 
+//Fermer la modale
 const closeModal = function (e) {
   if (modal === null) return;
   e.preventDefault();
@@ -39,6 +41,25 @@ const closeModal = function (e) {
   modal.querySelector(".js-close").removeEventListener("click", closeModal);
   modal = null;
 };
+
+//Afficher/cacher la premiere ou la deuxieme modale
+document.addEventListener("DOMContentLoaded", function () {
+  const AddPicture = document.querySelector(".modalgallery .AddPicture");
+  const flecheButton = document.querySelector(".ajoutgallery .fleche");
+  const modalGallery = document.querySelector(".modalgallery");
+  const ajoutGallery = document.querySelector(".ajoutgallery");
+
+  AddPicture.addEventListener("click", function (event) {
+    modalGallery.style.display = "none";
+    ajoutGallery.style.display = "flex";
+  });
+
+  flecheButton.addEventListener("click", function () {
+    modalGallery.style.display = "flex";
+    ajoutGallery.style.display = "none";
+    resetImagePreview();
+  });
+});
 
 //Ajouter une image dans la modale
 const Imagebtn = document.getElementById("imageInput");
@@ -68,12 +89,10 @@ closeBtn.addEventListener("click", function () {
 });
 
 function resetImagePreview() {
+  document.getElementById("imageInput").value = "";
   document.getElementById("imagePreview").src = "";
   document.getElementById("imagePreview").style.display = "none";
   document.querySelector(".contenu-ajoutgallery").style.display = "block";
 }
-
-//ajout des options dans catégorie
-//const categories = document.getElementById("categories");
 
 //Condition pour verifier le formulaire d'ajout photo

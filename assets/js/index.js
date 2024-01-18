@@ -148,15 +148,53 @@ const displayFilteredWorks = (filteredWorks) => {
   });
 };
 
+//Ajouter les 3 options dans catégorie de modale
+const selectmodal = document.getElementById("selectmodal");
+const displaymodalcategories = () => {
+  const OptionVide = document.createElement("option");
+  OptionVide.value = "";
+  selectmodal.appendChild(OptionVide);
+
+  categories.forEach((category) => {
+    const option = document.createElement("option");
+    option.textContent = category.name;
+    selectmodal.appendChild(option);
+  });
+
+  selectmodal.addEventListener("change", handleSelectChange);
+};
+
+const getmodalcategories = () => {
+  fetch("http://localhost:5678/api/categories")
+    .then((res) => res.json())
+    .then((data) => {
+      categories = data;
+      displaymodalcategories(categories);
+    });
+};
+
+getmodalcategories();
+
+const handleSelectChange = () => {
+  const selectedValue = selectmodal.value;
+
+  // Vérifier si l'option vide est sélectionnée
+  if (selectedValue === "") {
+    console.log("L'option vide est sélectionnée");
+  } else {
+    console.log("Catégorie sélectionnée : " + selectedValue);
+  }
+};
+
 //Affichage du message d'alerte Online/Offline
 const isLogin = () => {
   return sessionStorage.getItem("token") ? true : false;
 };
 
+// Afficher/cacher les élèments de la page principale
 document.addEventListener("DOMContentLoaded", function () {
   if (isLogin()) {
     alert("Online");
-    // L'utilisateur est connecté, afficher les éléments masqués
     const hideTopbar = document.getElementById("hide");
     const modifier = document.getElementById("modifier");
     const login = document.getElementById("login");
@@ -177,23 +215,4 @@ document.addEventListener("DOMContentLoaded", function () {
 logout.addEventListener("click", function () {
   sessionStorage.removeItem("token");
   window.location.href = "login.html";
-});
-
-//Afficher/cacher la premiere modale ou la deuxieme modale
-document.addEventListener("DOMContentLoaded", function () {
-  const AddPicture = document.querySelector(".modalgallery .AddPicture");
-  const flecheButton = document.querySelector(".ajoutgallery .fleche");
-  const modalGallery = document.querySelector(".modalgallery");
-  const ajoutGallery = document.querySelector(".ajoutgallery");
-
-  AddPicture.addEventListener("click", function (event) {
-    modalGallery.style.display = "none";
-    ajoutGallery.style.display = "flex";
-  });
-
-  flecheButton.addEventListener("click", function () {
-    modalGallery.style.display = "flex";
-    ajoutGallery.style.display = "none";
-    resetImagePreview();
-  });
 });

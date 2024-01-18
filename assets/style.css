@@ -523,10 +523,16 @@ label {
 }
 
 select {
-  padding: 5px;
+  padding-left: 15px;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M10 12.586l4.293-4.293a1 1 0 011.414 1.414l-5 5a1 1 0 01-1.414 0l-5-5a1 1 0 111.414-1.414L10 12.586z"/></svg>'); /* Ajoutez une icône de chevron au format SVG */
+  background-position: right 20px center;
+  background-repeat: no-repeat;
   height: 51px;
   border: none;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+  background-size: 16px;
 }
 
 .categories {
