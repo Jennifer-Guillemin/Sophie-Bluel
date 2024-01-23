@@ -1,218 +1,195 @@
-// La galerie
-let Works = [];
-
+//La galerie
 const gallery = document.querySelector(".gallery");
-const getworks = () => {
-  fetch("http://localhost:5678/api/works/")
-    .then((res) => res.json())
-    .then((data) => {
-      Works = data;
-      displayworks();
-    });
-};
-
-const displayworks = () => {
-  gallery.innerHTML = "";
-
-  Works.forEach((element) => {
-    gallery.innerHTML += `<figure>
-        <img src=${element.imageUrl} alt="Abajour Tahina">
-            <figcaption>${element.title}</figcaption>
-    </figure>`;
-  });
-};
 
 getworks();
 
-// Afficher la galerie dans la modale
-const modalphotos = document.querySelector(".modalphotos");
-const displaymodalworks = () => {
-  modalphotos.innerHTML = "";
-
-  Works.forEach((element) => {
-    const imageContainer = document.createElement("div");
-    const ModalImg = document.createElement("img");
-    const deleteBtn = document.createElement("button");
-    deleteBtn.innerHTML = "<i class='fa-solid fa-trash-can'>";
-
-    modalphotos.appendChild(imageContainer);
-    imageContainer.className = "imageContainer";
-
-    imageContainer.appendChild(ModalImg);
-    ModalImg.className = "ModalImg";
-    ModalImg.src = element.imageUrl;
-    ModalImg.alt = element.title;
-
-    imageContainer.appendChild(deleteBtn);
-    deleteBtn.className = "deleted";
-
-    deleteBtn.addEventListener("click", () => {
-      deletedWork(element.id);
-    });
-  });
-};
-
-const getmodalworks = () => {
-  fetch("http://localhost:5678/api/works/")
-    .then((res) => res.json())
-    .then((data) => {
-      Works = data;
-      displaymodalworks();
-    });
-};
-getmodalworks();
-
-const deletedWork = (id) => {
-  fetch("http://localhost:5678/api/works/" + id, {
-    method: "DELETE",
-    headers: {
-      Authorization: "Bearer " + JSON.parse(sessionStorage.getItem("token")),
-    },
-  }).then((response) => {
-    console.log(response);
-    getworks();
-    getmodalworks();
-  });
-};
-
 //Les filtres
-let categories = [];
+const filter = document.querySelector(".categories");
+const FilterAll = document.getElementById("FilterAll");
 
-const getcategories = () => {
-  fetch("http://localhost:5678/api/categories")
-    .then((res) => res.json())
-    .then((data) => {
-      categories = data;
-      createinputElement();
-    });
-};
-
-const button = document.querySelector(".categories");
-const createinputElement = () => {
-  for (let i = 0; i < categories.length; i++) {
-    const input = document.createElement("input");
-    button.appendChild(input);
-    input.type = "button";
-    input.value = categories[i].name;
-
-    input.addEventListener("click", () => {
-      handleInputClick(categories[i].id, categories[i].name);
-      const allInputs = document.querySelectorAll(".categories input");
-
-      allInputs.forEach((otherInput) => {
-        otherInput.classList.remove("selected");
-      });
-
-      input.classList.add("selected");
-      const categorieId = categories[i].id;
-      displayWorksByCategorie(categorieId);
-    });
-  }
-};
-
-const filtres = document.getElementById("filtres");
-
-filtres.addEventListener("click", (input) => {
+FilterAll.addEventListener("click", (input) => {
   displayworks();
   let i = 0;
   input.className = "";
-  console.log("Tous", [i]);
+  console.log("Tous");
 
   const allInputs = document.querySelectorAll(".categories input");
   allInputs.forEach((input) => {
     input.classList.remove("selected");
   });
 
-  filtres.classList.add("selected");
+  FilterAll.classList.add("selected");
 });
 
 getcategories();
 
-const handleInputClick = (categorieId, categorieName) => {
-  console.log(" id:", categorieId, ", name :", categorieName);
-};
+//Le login
+const EditMode = document.getElementById("EditMode");
+const logoutBtn = document.getElementById("logoutBtn");
+const loginBtn = document.getElementById("loginBtn");
+const modifier = document.getElementById("modifier");
 
-const displayWorksByCategorie = (categorieId) => {
-  const filteredWorks = Works.filter((work) => work.categoryId === categorieId);
-  displayFilteredWorks(filteredWorks);
-};
-
-const displayFilteredWorks = (filteredWorks) => {
-  gallery.innerHTML = "";
-
-  filteredWorks.forEach((element) => {
-    gallery.innerHTML += `<figure>
-        <img src=${element.imageUrl} alt="${element.title}">
-            <figcaption>${element.title}</figcaption>
-    </figure>`;
-  });
-};
-
-//Ajouter les 3 options dans catégorie de modale
-const selectmodal = document.getElementById("selectmodal");
-const displaymodalcategories = () => {
-  const OptionVide = document.createElement("option");
-  OptionVide.value = "";
-  selectmodal.appendChild(OptionVide);
-
-  categories.forEach((category) => {
-    const option = document.createElement("option");
-    option.textContent = category.name;
-    selectmodal.appendChild(option);
-  });
-
-  selectmodal.addEventListener("change", handleSelectChange);
-};
-
-const getmodalcategories = () => {
-  fetch("http://localhost:5678/api/categories")
-    .then((res) => res.json())
-    .then((data) => {
-      categories = data;
-      displaymodalcategories(categories);
-    });
-};
-
-getmodalcategories();
-
-const handleSelectChange = () => {
-  const selectedValue = selectmodal.value;
-
-  // Vérifier si l'option vide est sélectionnée
-  if (selectedValue === "") {
-    console.log("L'option vide est sélectionnée");
-  } else {
-    console.log("Catégorie sélectionnée : " + selectedValue);
-  }
-};
-
-//Affichage du message d'alerte Online/Offline
-const isLogin = () => {
-  return sessionStorage.getItem("token") ? true : false;
-};
-
-// Afficher/cacher les élèments de la page principale
 document.addEventListener("DOMContentLoaded", function () {
   if (isLogin()) {
-    alert("Online");
-    const hideTopbar = document.getElementById("hide");
-    const modifier = document.getElementById("modifier");
-    const login = document.getElementById("login");
-    const logout = document.getElementById("logout");
-    if ((hideTopbar, modifier, login, logout)) {
-      hideTopbar.style.display = "flex";
-      modifier.style.display = "flex";
-      button.style.display = "none";
-      login.style.display = "none";
-      logout.style.display = "inline-block";
-    }
+    console.log("online");
+    diplayEditModeOn();
+    login();
+    modifierOn();
+    ProjetsOn();
   } else {
-    alert("Offline");
+    console.log("offline");
+    diplayEditModeOff();
+    logout();
+    modifierOff();
+    ProjetsOff();
   }
 });
 
-// Fonction pour déconnecter l'utilisateur
-logout.addEventListener("click", function () {
+logoutBtn.addEventListener("click", function () {
   sessionStorage.removeItem("token");
-  window.location.href = "login.html";
+  location.reload();
+});
+
+//La modale
+const projets = document.getElementById("projets");
+const modal = document.getElementById("modal");
+const modalClose1 = document.getElementById("modalClose1");
+const modalClose2 = document.getElementById("modalClose2");
+const ModalGallery = document.querySelector(".ModalGallery");
+
+modal.addEventListener("click", (e) => {
+  if (e.target === modal) {
+    modalCloseFunction();
+  }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const ModifierBtn = document.querySelector(".ModifierBtn");
+  ModifierBtn.addEventListener("click", function () {
+    modal.className = "modal";
+  });
+});
+
+modalClose1.addEventListener("click", function () {
+  modalCloseFunction();
+});
+modalClose2.addEventListener("click", function () {
+  modalCloseFunction();
+});
+
+const modalContainer1 = document.getElementById("modalContainer1");
+const modalContainer2 = document.getElementById("modalContainer2");
+const AddPicture = document.querySelector(".AddPicture");
+const ModalBack = document.getElementById("ModalBack");
+
+AddPicture.addEventListener("click", () => {
+  modalContainer1.className = "DisplayOff";
+  modalContainer2.className = "modalContainer";
+  ImgSelected.className = "DisplayOff";
+  SelecteImg.className = "ModalAddFile";
+  previewImage.src = "";
+  ModalAddFile.value = "";
+  ModalAddTitle.value = "";
+  result.innerText = "";
+  ModalValidate.className = "ModalValidate";
+  ModalValidate.disabled = true;
+});
+
+ModalBack.addEventListener("click", () => {
+  modalContainer1.className = "modalContainer";
+  modalContainer2.className = "DisplayOff";
+});
+
+const ModalAddFile = document.getElementById("ModalAddFile");
+const ModalAddTitle = document.querySelector(".ModalAddTitle");
+const ModalSelectedCategorie = document.querySelector(
+  ".ModalSelectedCategorie"
+);
+const SelecteImg = document.getElementById("SelecteImg");
+const ImgSelected = document.getElementById("ImgSelected");
+
+ModalAddFile.addEventListener("change", (event) => {
+  const selectedFile = event.target.files[0];
+
+  if (previewImage.src) {
+    URL.revokeObjectURL(previewImage.src);
+  }
+
+  if (selectedFile) {
+    if (selectedFile.type.startsWith("image/")) {
+      if (selectedFile.size <= 4 * 1024 * 1024) {
+        const imageURL = URL.createObjectURL(selectedFile);
+        SelecteImg.className = "DisplayOff";
+        ImgSelected.className = "divImgSelected";
+        previewImage.src = imageURL;
+      } else {
+        alert("La taille du fichier doit être inférieure ou égale à 4 Mo.");
+        ModalAddFile.value = "";
+      }
+    } else {
+      alert("Le fichier sélectionné n'est pas une image.");
+      ModalAddFile.value = "";
+    }
+  } else {
+    previewImage.src = "";
+    ImgSelected.className = "DisplayOff";
+    SelecteImg.className = "ModalAddFile";
+  }
+});
+
+//Catégorie de la modale
+const dropdownButton = document.getElementById("result");
+
+dropdownButton.addEventListener("click", function () {
+  toggleDropdown();
+});
+
+window.onclick = function (event) {
+  if (!event.target.matches(".ModalSelectedCategorie")) {
+    var dropdowns = document.getElementsByClassName("ModalDropdownContent");
+    for (var i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.style.display === "block") {
+        openDropdown.style.display = "none";
+      }
+    }
+  }
+};
+
+const optionchoice = document.querySelector("optionchoice");
+const ModalValidate = document.querySelector(".ModalValidate");
+
+function verifierValeurs() {
+  if (ModalAddFile.files.length === 0) {
+    console.error("Veuillez sélectionner un fichier.");
+    ModalValidate.className = "ModalValidate";
+    ModalValidate.disabled = true;
+    return;
+  }
+
+  const titleValue = ModalAddTitle.value.trim();
+  if (titleValue === "") {
+    console.error("Veuillez entrer un titre.");
+    ModalValidate.className = "ModalValidate";
+    ModalValidate.disabled = true;
+    return;
+  }
+
+  const resultValue = ModalSelectedCategorie.textContent.trim();
+  if (resultValue === "") {
+    console.error("Veuillez sélectionner une catégorie.");
+    ModalValidate.className = "ModalValidate";
+    ModalValidate.disabled = true;
+    return;
+  }
+  console.log("Toutes les valeurs sont correctes.");
+  ModalValidate.className = "ModalValidate ModalValidated";
+  ModalValidate.disabled = false;
+}
+
+ModalAddFile.addEventListener("input", verifierValeurs);
+ModalAddTitle.addEventListener("input", verifierValeurs);
+
+ModalValidate.addEventListener("click", () => {
+  AddWorks(CatId);
 });

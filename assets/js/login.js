@@ -1,9 +1,6 @@
-//Formulaire de connexion
-const btnLogin = document.querySelector("#btn_login");
+const loginBTN = document.querySelector("#loginBTN");
 
-btnLogin.addEventListener("click", (e) => {
-  e.preventDefault();
-
+loginBTN.addEventListener("click", (e) => {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
@@ -11,21 +8,25 @@ btnLogin.addEventListener("click", (e) => {
     email: email,
     password: password,
   };
+
   login(user);
 });
 
 const login = (user) => {
   fetch("http://localhost:5678/api/users/login", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "content-type": "application/json" },
     body: JSON.stringify(user),
   })
-    .then((rep) => rep.json())
+    .then((response) => {
+      return response.json();
+    })
     .then((data) => {
       if (data.token) {
         sessionStorage.setItem("token", JSON.stringify(data.token));
-        window.location.href = "index.html";
+        document.location.href = "index.html";
       } else {
+        console.error("Erreur dans l’identifiant ou le mot de passe");
         alert("Erreur dans l’identifiant ou le mot de passe");
       }
     });
