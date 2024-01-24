@@ -66,7 +66,6 @@ const diplayEditModeOn = () => {
 const modifierOn = () => {
   modifier.style.display = "inline-block";
 };
-
 const diplayEditModeOff = () => {
   EditMode.innerHTML = "";
   EditMode.className = "DisplayOff";

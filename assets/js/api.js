@@ -27,7 +27,7 @@ const getcategories = () => {
     });
 };
 
-//Ajouter une nouvelle phto
+//Ajouter une nouvelle photo
 const addworksApi = (formData) => {
   fetch("http://localhost:5678/api/works", {
     method: "POST",

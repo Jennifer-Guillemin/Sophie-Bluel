@@ -201,12 +201,11 @@ window.onclick = function (event) {
 };
 
 //Vérification du formulaire
-const optionchoice = document.querySelector("optionchoice");
 const ModalValidate = document.querySelector(".ModalValidate");
 
 function verifierValeurs() {
   if (ModalAddFile.files.length === 0) {
-    console.error("Veuillez sélectionner un fichier.");
+    console.error("Veuillez sélectionner une image.");
     ModalValidate.className = "ModalValidate";
     ModalValidate.disabled = true;
     return;
