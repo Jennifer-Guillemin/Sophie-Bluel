@@ -16,29 +16,31 @@
     <link rel="stylesheet" href="login.html" />
   </head>
   <body>
+
     <header>
       <div id="EditMode" class="DisplayOff"></div>
       <div class="head">
-        <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
-        <nav>
-          <ul>
-            <a href="#portfolio" class="no-style">
-              <li>projets</li>
-            </a>
-            <a href="#contact" class="no-style">
-              <li>contact</li>
-            </a> 
-      <a href="login.html" class="no-style" id="loginBtn">
-        <li>login</li>
-      </a>
+      <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+      <nav>
+        <ul>
+          <a href="#portfolio" class="no-style">
+            <li>projets</li>
+          </a>
+          <a href="#contact" class="no-style">
+            <li>contact</li>
+          </a> 
+          <a href="login.html" class="no-style" id="loginBtn">
+            <li>login</li>
+          </a>
           <a href="" class="no-style" id="logoutBtn">
-        <li>logout</li>
-      </a>
-            <li><img src="./assets/icons/instagram.png" alt="Instagram" /></li>
-          </ul>
-        </nav>
-      </div>
+            <li>logout</li>
+          </a>
+          <li><img src="./assets/icons/instagram.png" alt="Instagram" /></li>
+        </ul>
+      </nav>
+    </div>
     </header>
+
     <main>
       <section id="introduction">
         <figure>
@@ -63,6 +65,7 @@
           </p>
         </article>
       </section>
+
       <section id="portfolio">
         <div class="projets-title">
            <h2 id="projets">Mes projets</h2>
@@ -73,21 +76,22 @@
         </div>
         
         <div id="modal" class="DisplayOff">
-          <div id="modalContainer1" class="modalContainer">
-            <button id="modalClose1" class="modalClose">
+          <div id="modalgallery" class="modalContainer">
+            <button id="js-close1" class="modalClose">
               <i class="fa-solid fa-xmark" ></i>
             </button>
             <p class="modalTitle">Galerie photo</p>
-            <div class="ModalGallery"></div>
+            <div class="modalphotos"></div>
             <hr>
             <input type="submit" value="Ajouter une photo" class="AddPicture">
           </div>
-          <div id="modalContainer2" class="DisplayOff">
+
+          <div id="ajoutgallery" class="DisplayOff">
             <div class="ModalBtn">
           <button id="ModalBack" class="ModalBack">
             <i class="fa-solid fa-arrow-left"></i>
           </button>
-            <button id="modalClose2" class="modalClose">
+            <button id="js-close2" class="modalClose">
               <i class="fa-solid fa-xmark" ></i>
             </button>
             </div>

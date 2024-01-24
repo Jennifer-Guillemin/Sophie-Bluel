@@ -1,3 +1,4 @@
+// Le login
 const loginBTN = document.querySelector("#loginBTN");
 
 loginBTN.addEventListener("click", (e) => {

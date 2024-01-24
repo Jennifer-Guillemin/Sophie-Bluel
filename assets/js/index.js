@@ -1,7 +1,51 @@
-//La galerie
+//La galerie principal
 const gallery = document.querySelector(".gallery");
+const displayworks = () => {
+  gallery.innerHTML = "";
+
+  Works.forEach((element) => {
+    gallery.innerHTML += `<figure>
+        <img src=${element.imageUrl} alt="${element.title}">
+            <figcaption>${element.title}</figcaption>
+    </figure>`;
+  });
+};
 
 getworks();
+
+//La galerie de modale
+const displayModalworks = () => {
+  modalphotos.innerHTML = "";
+
+  Works.forEach((element) => {
+    const imageContainer = document.createElement("div");
+    const ModalImg = document.createElement("img");
+    const deletedBtn = document.createElement("button");
+    deletedBtn.innerHTML = "<i class='fa-solid fa-trash-can'>";
+
+    modalphotos.appendChild(imageContainer);
+    imageContainer.className = "imageContainer";
+
+    imageContainer.appendChild(ModalImg);
+    ModalImg.className = "ModalImg";
+    ModalImg.src = element.imageUrl;
+    ModalImg.alt = element.title;
+
+    imageContainer.appendChild(deletedBtn);
+    deletedBtn.className = "deleted";
+
+    //message d'alert avant de supprimer
+    deletedBtn.addEventListener("click", () => {
+      const confirmDelete = window.confirm(
+        "Êtes-vous sûr de vouloir supprimer cette photo?"
+      );
+
+      if (confirmDelete) {
+        deletedWork(element.id);
+      }
+    });
+  });
+};
 
 //Les filtres
 const filter = document.querySelector(".categories");
@@ -23,7 +67,7 @@ FilterAll.addEventListener("click", (input) => {
 
 getcategories();
 
-//Le login
+//Afficher/cacher les élèments
 const EditMode = document.getElementById("EditMode");
 const logoutBtn = document.getElementById("logoutBtn");
 const loginBtn = document.getElementById("loginBtn");
@@ -53,9 +97,9 @@ logoutBtn.addEventListener("click", function () {
 //La modale
 const projets = document.getElementById("projets");
 const modal = document.getElementById("modal");
-const modalClose1 = document.getElementById("modalClose1");
-const modalClose2 = document.getElementById("modalClose2");
-const ModalGallery = document.querySelector(".ModalGallery");
+const jsclose1 = document.getElementById("js-close1");
+const jsclose2 = document.getElementById("js-close2");
+const modalphotos = document.querySelector(".modalphotos");
 
 modal.addEventListener("click", (e) => {
   if (e.target === modal) {
@@ -70,21 +114,21 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-modalClose1.addEventListener("click", function () {
+jsclose1.addEventListener("click", function () {
   modalCloseFunction();
 });
-modalClose2.addEventListener("click", function () {
+jsclose2.addEventListener("click", function () {
   modalCloseFunction();
 });
 
-const modalContainer1 = document.getElementById("modalContainer1");
-const modalContainer2 = document.getElementById("modalContainer2");
+const modalgallery = document.getElementById("modalgallery");
+const ajoutgallery = document.getElementById("ajoutgallery");
 const AddPicture = document.querySelector(".AddPicture");
 const ModalBack = document.getElementById("ModalBack");
 
 AddPicture.addEventListener("click", () => {
-  modalContainer1.className = "DisplayOff";
-  modalContainer2.className = "modalContainer";
+  modalgallery.className = "DisplayOff";
+  ajoutgallery.className = "modalContainer";
   ImgSelected.className = "DisplayOff";
   SelecteImg.className = "ModalAddFile";
   previewImage.src = "";
@@ -96,8 +140,8 @@ AddPicture.addEventListener("click", () => {
 });
 
 ModalBack.addEventListener("click", () => {
-  modalContainer1.className = "modalContainer";
-  modalContainer2.className = "DisplayOff";
+  modalgallery.className = "modalContainer";
+  ajoutgallery.className = "DisplayOff";
 });
 
 const ModalAddFile = document.getElementById("ModalAddFile");
@@ -156,6 +200,7 @@ window.onclick = function (event) {
   }
 };
 
+//Vérification du formulaire
 const optionchoice = document.querySelector("optionchoice");
 const ModalValidate = document.querySelector(".ModalValidate");
 

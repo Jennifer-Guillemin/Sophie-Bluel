@@ -1,15 +1,3 @@
-//La galerie
-const displayworks = () => {
-  gallery.innerHTML = "";
-
-  Works.forEach((element) => {
-    gallery.innerHTML += `<figure>
-        <img src=${element.imageUrl} alt="${element.title}">
-            <figcaption>${element.title}</figcaption>
-    </figure>`;
-  });
-};
-
 //Les filtres
 const createInputElements = () => {
   for (let i = 0; i < categories.length; i++) {
@@ -53,9 +41,21 @@ const displayFilteredWorks = (filteredWorks) => {
   });
 };
 
-//Le login
+//fonction pour vérifier si l'utilisateur est connecté ou pas
 const isLogin = () => {
   return sessionStorage.getItem("token") ? true : false;
+};
+
+// Afficher/cacher les élèments
+const login = () => {
+  loginBtn.style.display = "none";
+  logoutBtn.style.display = "inline-block";
+  FilterAll.classList.add("DisplayOff");
+};
+const logout = () => {
+  logoutBtn.style.display = "none";
+  loginBtn.style.display = "inline-block";
+  FilterAll.classList.remove("DisplayOff");
 };
 
 const diplayEditModeOn = () => {
@@ -63,67 +63,23 @@ const diplayEditModeOn = () => {
   <p>Mode édition</p></a>`;
   EditMode.className = "EditMode";
 };
+const modifierOn = () => {
+  modifier.style.display = "inline-block";
+};
+
 const diplayEditModeOff = () => {
   EditMode.innerHTML = "";
   EditMode.className = "DisplayOff";
 };
-
-const login = () => {
-  loginBtn.style.display = "none";
-  logoutBtn.style.display = "inline-block";
-  FilterAll.classList.add("DisplayOff");
+const modifierOff = () => {
+  modifier.style.display = "none";
 };
 
-const logout = () => {
-  loginBtn.style.display = "inline-block";
-  logoutBtn.style.display = "none";
-  FilterAll.classList.remove("DisplayOff");
-};
 const ProjetsOn = () => {
   projets.className = "projets";
 };
 const ProjetsOff = () => {
   projets.className = "";
-};
-const modifierOn = () => {
-  modifier.style.display = "inline-block";
-};
-
-const modifierOff = () => {
-  modifier.style.display = "none";
-};
-
-//La modale
-const displayModalworks = () => {
-  ModalGallery.innerHTML = "";
-
-  Works.forEach((element) => {
-    const imageContainer = document.createElement("div");
-    const ModalImg = document.createElement("img");
-    const deletedBtn = document.createElement("button");
-    deletedBtn.innerHTML = "<i class='fa-solid fa-trash-can'>";
-
-    ModalGallery.appendChild(imageContainer);
-    imageContainer.className = "imageContainer";
-
-    imageContainer.appendChild(ModalImg);
-    ModalImg.className = "ModalImg";
-    ModalImg.src = element.imageUrl;
-    ModalImg.alt = element.title;
-
-    imageContainer.appendChild(deletedBtn);
-    deletedBtn.className = "deleted";
-
-    deletedBtn.addEventListener("click", () => {
-      const confirmDelete = window.confirm(
-        "Êtes-vous sûr de vouloir supprimer cette photo?"
-      );
-
-      if (confirmDelete) {
-        deletedWork(element.id);
-      }
-    });
-  });
 };
 
 // Catégorie de la modale
@@ -164,8 +120,8 @@ const createDropdownOptions = () => {
 // Fermer la modale
 const modalCloseFunction = () => {
   modal.className = "DisplayOff";
-  modalContainer1.className = "modalContainer";
-  modalContainer2.className = "DisplayOff";
+  modalgallery.className = "modalContainer";
+  ajoutgallery.className = "DisplayOff";
 };
 
 function AddWorks(CatId) {
