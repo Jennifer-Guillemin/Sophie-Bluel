@@ -75,10 +75,10 @@ const modifierOff = () => {
 };
 
 const ProjetsOn = () => {
-  projets.className = "projets";
+  ProjetsOn.className = "projets";
 };
 const ProjetsOff = () => {
-  projets.className = "";
+  ProjetsOn.className = "";
 };
 
 // Catégorie de la modale
@@ -94,7 +94,7 @@ const toggleDropdown = () => {
 const choisirOption = (option, categoryId) => {
   result.innerText = option;
   myDropdown.style.display = "none";
-  console.log("jai cliquer sur", categoryId);
+  console.log(categoryId);
   verifierValeurs(categoryId);
 };
 
@@ -116,13 +116,7 @@ const createDropdownOptions = () => {
   });
 };
 
-// Fermer la modale
-const modalCloseFunction = () => {
-  modal.className = "DisplayOff";
-  modalgallery.className = "modalContainer";
-  ajoutgallery.className = "DisplayOff";
-};
-
+//Ajouter une nouvelle photo
 function AddWorks(CatId) {
   const formData = new FormData();
   formData.append("image", ModalAddFile.files[0]);
@@ -131,3 +125,10 @@ function AddWorks(CatId) {
   console.log("test", CatId);
   addworksApi(formData);
 }
+
+// Fermer la modale
+const modalCloseFunction = () => {
+  modal.className = "DisplayOff";
+  modalgallery.className = "modalContainer";
+  ajoutgallery.className = "DisplayOff";
+};

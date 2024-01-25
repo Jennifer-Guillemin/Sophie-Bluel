@@ -34,7 +34,7 @@ const displayModalworks = () => {
     imageContainer.appendChild(deletedBtn);
     deletedBtn.className = "deleted";
 
-    //message d'alert avant de supprimer
+    //Message d'alert avant de supprimer la photo
     deletedBtn.addEventListener("click", () => {
       const confirmDelete = window.confirm(
         "Êtes-vous sûr de vouloir supprimer cette photo?"
@@ -95,7 +95,6 @@ logoutBtn.addEventListener("click", function () {
 });
 
 //La modale
-const projets = document.getElementById("projets");
 const modal = document.getElementById("modal");
 const jsclose1 = document.getElementById("js-close1");
 const jsclose2 = document.getElementById("js-close2");
@@ -144,6 +143,7 @@ ModalBack.addEventListener("click", () => {
   ajoutgallery.className = "DisplayOff";
 });
 
+//La modale ajoutgallery
 const ModalAddFile = document.getElementById("ModalAddFile");
 const ModalAddTitle = document.querySelector(".ModalAddTitle");
 const ModalSelectedCategorie = document.querySelector(

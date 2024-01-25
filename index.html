@@ -6,45 +6,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <link
       href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
       rel="stylesheet"
     />
     <meta name="description" content="" />
-    <link rel="stylesheet" href="./assets/style.css" />
+    <link rel="stylesheet" href="assets/style.css" />
     <link rel="stylesheet" href="login.html" />
   </head>
   <body>
-
     <header>
       <div id="EditMode" class="DisplayOff"></div>
       <div class="head">
-      <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
-      <nav>
-        <ul>
-          <a href="#portfolio" class="no-style">
-            <li>projets</li>
-          </a>
-          <a href="#contact" class="no-style">
-            <li>contact</li>
-          </a> 
-          <a href="login.html" class="no-style" id="loginBtn">
-            <li>login</li>
-          </a>
-          <a href="" class="no-style" id="logoutBtn">
-            <li>logout</li>
-          </a>
-          <li><img src="./assets/icons/instagram.png" alt="Instagram" /></li>
-        </ul>
-      </nav>
-    </div>
+        <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+        <nav>
+          <ul>
+            <li><a href="#portfolio" class="no-style">projets</a></li>
+            <li><a href="#contact" class="no-style">contact </a></li>
+            <li>
+              <a href="login.html" class="no-style" id="loginBtn">login</a>
+            </li>
+            <li><a href="" class="no-style" id="logoutBtn">logout </a></li>
+            <li><img src="assets/icons/instagram.png" alt="Instagram" /></li>
+          </ul>
+        </nav>
+      </div>
     </header>
 
     <main>
       <section id="introduction">
         <figure>
-          <img src="./assets/images/sophie-bluel.png" alt="" />
+          <img src="assets/images/sophie-bluel.png" alt="" />
         </figure>
         <article>
           <h2>Designer d'espace</h2>
@@ -68,62 +67,77 @@
 
       <section id="portfolio">
         <div class="projets-title">
-           <h2 id="projets">Mes projets</h2>
-           <div class="modifier" id="modifier"><button class="ModifierBtn"><i class="fa-regular fa-pen-to-square"></i><pan>modifier</span></button></div>
+          <h2 id="projets">Mes projets</h2>
+          <div class="modifier" id="modifier">
+            <button class="ModifierBtn">
+              <i class="fa-regular fa-pen-to-square"></i><span>modifier</span>
+            </button>
+          </div>
         </div>
         <div class="categories">
-          <input type="submit" class="selected"  value="Tous" id="FilterAll"></input>
+          <input type="submit" class="selected" value="Tous" id="FilterAll" />
         </div>
-        
+
         <div id="modal" class="DisplayOff">
           <div id="modalgallery" class="modalContainer">
             <button id="js-close1" class="modalClose">
-              <i class="fa-solid fa-xmark" ></i>
+              <i class="fa-solid fa-xmark"></i>
             </button>
             <p class="modalTitle">Galerie photo</p>
             <div class="modalphotos"></div>
-            <hr>
-            <input type="submit" value="Ajouter une photo" class="AddPicture">
+            <hr />
+            <input type="submit" value="Ajouter une photo" class="AddPicture" />
           </div>
 
           <div id="ajoutgallery" class="DisplayOff">
             <div class="ModalBtn">
-          <button id="ModalBack" class="ModalBack">
-            <i class="fa-solid fa-arrow-left"></i>
-          </button>
-            <button id="js-close2" class="modalClose">
-              <i class="fa-solid fa-xmark" ></i>
-            </button>
+              <button id="ModalBack" class="ModalBack">
+                <i class="fa-solid fa-arrow-left"></i>
+              </button>
+              <button id="js-close2" class="modalClose">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
             </div>
             <p class="modalTitle">Ajout photo</p>
             <div>
               <div id="ImgSelected" class="DisplayOff">
-                <img id="previewImage" src="" alt="Preview Image" class="ImgSelected">
+                <img
+                  id="previewImage"
+                  src=""
+                  alt="Preview Image"
+                  class="ImgSelected"
+                />
               </div>
-              <div id="SelecteImg" class="ModalAddFile" >
+              <div id="SelecteImg" class="ModalAddFile">
                 <i class="fa-regular fa-image"></i>
-                <label for="ModalAddFile" class="ModalAddFileBtn">+ Ajouter photo</label>
-                <input id="ModalAddFile" type="file" class="DisplayOff">
+                <label for="ModalAddFile" class="ModalAddFileBtn"
+                  >+ Ajouter photo</label
+                >
+                <input id="ModalAddFile" type="file" class="DisplayOff" />
                 <p class="ModalText">jpg, png : 4mo max</p>
               </div>
             </div>
             <p class="modalTitle2">Titre</p>
-            <input type="text" class="ModalAddTitle">
+            <input type="text" class="ModalAddTitle" />
             <p class="modalTitle2">Catégorie</p>
-              <div class="ModalDropdown">
-                <div class="ButtonContainer">
-                 <button class="ModalSelectedCategorie" id="result"></button>
-                 <i class="fa-solid fa-chevron-down" id="icon"></i>
-                </div>
-                <div class="ModalDropdownContent" id="myDropdown"></div>
+            <div class="ModalDropdown">
+              <div class="ButtonContainer">
+                <button class="ModalSelectedCategorie" id="result"></button>
+                <i class="fa-solid fa-chevron-down" id="icon"></i>
               </div>
-            <hr>
-            <input type="submit" value="Valider" disabled class="ModalValidate">
+              <div class="ModalDropdownContent" id="myDropdown"></div>
+            </div>
+            <hr />
+            <input
+              type="submit"
+              value="Valider"
+              disabled
+              class="ModalValidate"
+            />
           </div>
         </div>
 
         <div class="gallery"></div>
-
       </section>
 
       <section id="contact">
