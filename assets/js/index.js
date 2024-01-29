@@ -89,6 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
+// function pour déconnecter l'utilisateur
 logoutBtn.addEventListener("click", function () {
   sessionStorage.removeItem("token");
   location.reload();
