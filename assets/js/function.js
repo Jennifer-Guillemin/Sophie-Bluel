@@ -45,6 +45,11 @@ const displayFilteredWorks = (filteredWorks) => {
 const isLogin = () => {
   return sessionStorage.getItem("token") ? true : false;
 };
+if (isLogin()) {
+  alert("Online");
+} else {
+  alert("Offline");
+}
 
 // Afficher/cacher les élèments
 const login = () => {
